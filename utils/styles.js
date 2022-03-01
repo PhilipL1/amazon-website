@@ -13,7 +13,7 @@ const useStyles = makeStyles({
   },
   footer: {
     textAlign: 'center',
-    maginTop: 10,
+    marginTop: 10,
   },
   brand: {
     fontWeight: 'bold',
@@ -23,8 +23,16 @@ const useStyles = makeStyles({
     flexGrow: 1,
   },
   section: {
-    maginTop: 10,
+    marginTop: 10,
     marginBottom: 10,
+  },
+  form: {
+    maxWidth: 800,
+    margin: '0 auto',
+  },
+  navbarButton: {
+    color: '#ffffff',
+    textTransform: 'initial',
   },
 });
 
