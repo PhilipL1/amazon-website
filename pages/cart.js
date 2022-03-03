@@ -39,7 +39,7 @@ function CartScreen() {
     dispatch({ type: 'CART_ADD_ITEM', payload: { ...item, quantity } });
   };
   const removeItemHandler = (item) => {
-    dispatch({ type: 'CART_REMOVE_ITEM', payload: item }); // passing item to payload so you can call this is STORE.js with action.payload.item
+    dispatch({ type: 'CART_REMOVE_ITEM', payload: item }); // passing item to payload so you can call this in STORE.js with action.payload.item
   };
   const checkoutHandler = () => {
     router.push('/shipping');
@@ -151,7 +151,7 @@ function CartScreen() {
                     variant="contained"
                     color="primary"
                     fullWidth
-                    onlick={checkoutHandler()}
+                    onClick={() => checkoutHandler()}
                   >
                     Check Out
                   </Button>
