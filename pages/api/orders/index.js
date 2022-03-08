@@ -20,7 +20,7 @@ handler.post(async (req, res) => {
   });
   const order = await newOrder.save();
   // console.log('neworderok', order);
-  res.send(order);
+  res.status(201).send(order);
 });
 //.satus(201)
 export default handler;

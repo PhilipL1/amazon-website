@@ -57,72 +57,39 @@ function PlaceOrder() {
       router.push('/cart');
     }
   }, []);
+
   const { closeSnackbar, enqueueSnackbar } = useSnackbar();
-  const [loading, setloading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const placeOrderHandler = async () => {
     closeSnackbar();
     try {
-      setloading(true);
-      const response = await fetch('/api/orders/', {
-        method: 'POST',
-        body: JSON.stringify({
-          user: userInfo,
+      setLoading(true);
+      const { data } = await axios.post(
+        '/api/orders',
+        {
           orderItems: cartItems,
           shippingAddress,
           paymentMethod,
           itemsPrice,
-          taxPrice,
           shippingPrice,
+          taxPrice,
           totalPrice,
-          authorization: `Bearer ${userInfo.token}`,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-          headers: { authorization: `Bearer ${userInfo.token}` },
         },
-      });
-
-      // const { data } = await authAxios.post (
-      //   '/api/orders/',
-      // {
-      //   //   user: userInfo._id,
-      //   orderItems: cartItems,
-      //   shippingAddress,
-      //   paymentMethod,
-      //   itemsPrice,
-      //   taxPrice,
-      //   shippingPrice,
-      //   totalPrice,
-      //   // token: userInfo.token,
-      // }
-      //   // {
-      //   // headers: {
-      //   //   'content-type': 'application/json',
-      //   //   Authorization: `Bearer ${userInfo.token}`,
-      //   // },
-      //   // }
-      // );
+        {
+          headers: {
+            authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
       dispatch({ type: 'CART_CLEAR' });
       Cookies.remove('cartItems');
-      setloading(false);
-      const data = await response.json();
-      console.log('PLACEHOLDER', data);
+      setLoading(false);
       router.push(`/order/${data._id}`);
     } catch (err) {
-      setloading(false);
+      setLoading(false);
       enqueueSnackbar(getError(err), { variant: 'error' });
     }
   };
-  // const apiUrl = 'http://localhost:3000';
-  // const authAxios = axios.create({
-  //   baseURL: apiUrl,
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     Authorization: `Bearer ${userInfo.token}`,
-  //   },
-  // });
-  console.log(`Bearer ${userInfo.token}`);
-
   return (
     <Layout title="Place Order">
       <CheckoutWizard activeStep={3}></CheckoutWizard>
@@ -265,7 +232,7 @@ function PlaceOrder() {
                   variant="contained"
                   color="primary"
                   fullWidth
-                  onClick={() => placeOrderHandler()}
+                  onClick={placeOrderHandler}
                 >
                   Place Order
                 </Button>

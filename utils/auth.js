@@ -19,7 +19,7 @@ const signToken = (user) => {
 
 const secret = process.env.JWT_SECRET;
 
-const isAuth = (req, res, next) => {
+const isAuth = async (req, res, next) => {
   const { authorization } = req.headers;
   //console.log('auth', authorization);
   // console.log('user', req.headers);
