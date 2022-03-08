@@ -30,6 +30,7 @@ function Login() {
   const { userInfo } = state;
   useEffect(() => {
     if (userInfo) {
+      console.log('userInfoooo', userInfo);
       router.push('/');
     }
   }, []);
@@ -45,7 +46,6 @@ function Login() {
         email,
         password,
       });
-      console.log(data);
       dispatch({ type: 'USER_LOGIN', payload: data });
       Cookies.set('userInfo', JSON.stringify(data));
       router.push(redirect || '/');

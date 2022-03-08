@@ -33,11 +33,8 @@ function Payment() {
   }, []);
 
   const submitHandler = (event) => {
-    console.log('dd', paymentMethod);
     closeSnackbar();
     event.preventDefault();
-    console.log('payentmenthod ahahhahah');
-    console.log(paymentMethod);
     if (!paymentMethod) {
       enqueueSnackbar('Payment method is required', { variant: 'error' });
     } else {

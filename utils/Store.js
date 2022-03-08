@@ -15,8 +15,11 @@ const initialState = {
   userInfo: Cookies.get('userInfo')
     ? JSON.parse(Cookies.get('userInfo'))
     : null,
+  paymentMethod: Cookies.get('paymentMethod')
+    ? Cookies.get('paymentMethod')
+    : '',
 };
-console.log(Cookies.get('userInfo'));
+
 function reducer(state, action) {
   switch (action.type) {
     case 'DARK_MODE_ON':
@@ -55,11 +58,21 @@ function reducer(state, action) {
         cart: { ...state.cart, paymentMethod: action.payload },
       };
     }
+    case 'CART_CLEAR': {
+      return {
+        ...state,
+        cart: { ...state.cart, cart: { ...state.cart, cartItems: [] } },
+      };
+    }
     case 'USER_LOGIN': {
       return { ...state, userInfo: action.payload };
     }
     case 'USER_LOGOUT': {
-      return { ...state, userInfo: null, cart: { cartItems: [] } };
+      return {
+        ...state,
+        userInfo: null,
+        cart: { cartItems: [], shippingAddress: {}, paymentMethod: '' },
+      };
     }
     default:
       return state;

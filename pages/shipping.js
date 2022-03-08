@@ -34,7 +34,6 @@ function Shipping() {
     if (!userInfo) {
       router.push('/login?redirect=/shipping');
     }
-    console.log(shippingAddress);
     setValue('fullName', shippingAddress.fullName); //field you are going to update, the value you are going to replace with
     setValue('address', shippingAddress.address);
     setValue('city', shippingAddress.city);
